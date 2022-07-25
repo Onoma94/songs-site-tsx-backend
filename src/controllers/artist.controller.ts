@@ -1,10 +1,10 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Request } from 'express';
 
 @Controller('artist')
 export class ArtistController{
-    @Get()
-    findAll(@Req() request: Request): string{
-        return "Weezer"
+    @Get('artist/:id')
+    findOne(@Param() params): string{
+        return `#${params.id} Weezer`;
     }
 }
