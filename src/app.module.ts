@@ -11,8 +11,8 @@ import { ContactController } from './controllers/contact.controller';
 import { Artist } from './entities/artist.entity';
 import { Chart } from './entities/chart.entity';
 import { Chartdate } from './entities/chartdate.entity';
-import { Guestbook } from './entities/guestbook.entity';
 import { Song } from './entities/song.entity';
+import { SongsService } from './services/songs.service';
 
 @Module({
   imports: [
@@ -20,14 +20,14 @@ import { Song } from './entities/song.entity';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
-      password: 'dupa',
+      username: 'user',
+      password: 'cipa',
       database: 'songs',
-      entities: [Artist, Chart, Chartdate, Guestbook, Song],
+      entities: [Artist, Chart, Chartdate, Song],
       synchronize: true,
     }),
   ],
   controllers: [AppController, ArtistController, ArtistsController, ChartController, ContactController, SongController, SongsController],
-  providers: [AppService],
+  providers: [AppService, SongsService],
 })
 export class AppModule {}

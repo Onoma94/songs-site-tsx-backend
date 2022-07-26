@@ -1,9 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { Request } from 'express';
 
-@Controller('song')
+@Controller('song/:id')
 export class SongController{
-    @Get('song/:id')
+    @Get('/song/:id')
     findOne(@Param() params): string{
         return `#${params.id} Weezer - Buddy Holly`;
     }
