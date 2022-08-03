@@ -1,0 +1,230 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model artist {
+  artistid   Int    @id @default(autoincrement())
+  artistname String @db.VarChar(255)
+}
+
+model artists {
+  ArtistID   Int     @id @default(autoincrement())
+  ArtistName String? @db.VarChar(255)
+  songs      songs[]
+}
+
+model artists1 {
+  ArtistID   Int     @id @default(autoincrement())
+  ArtistName String? @db.VarChar(255)
+}
+
+model chart {
+  chartid    Int    @id @default(autoincrement())
+  chartno    Int
+  chartpos   Int
+  artistid   Int
+  songid     Int
+  artistname String @db.VarChar(255)
+  songtitle  String @db.VarChar(255)
+}
+
+model chart1_dates {
+  ChartNo   Int       @id @default(autoincrement())
+  ChartDate DateTime? @db.Date
+}
+
+model chartdate {
+  chartno   Int    @id @default(autoincrement())
+  chartdate String @db.VarChar(255)
+}
+
+model charts {
+  ChartID  Int    @id @unique(map: "ChartID_UNIQUE") @default(autoincrement())
+  SongID   Int?
+  ChartNo  Int?
+  ChartPos Int?
+  songs    songs? @relation(fields: [SongID], references: [SongID], onDelete: NoAction, onUpdate: NoAction, map: "SongID")
+
+  @@index([SongID], map: "SongID_idx")
+}
+
+model charts1 {
+  ChartID  Int  @id @unique(map: "ChartID_UNIQUE") @default(autoincrement())
+  SongID   Int?
+  ChartNo  Int?
+  ChartPos Int?
+
+  @@index([SongID], map: "SongID_idx")
+}
+
+model csv2015 {
+  SongID     Int     @id @default(autoincrement())
+  ArtistName String? @db.VarChar(255)
+  SongTitle  String? @db.VarChar(255)
+  N740       Int?
+  N741       Int?
+  N742       Int?
+  N743       Int?
+  N744       Int?
+  N745       Int?
+  N746       Int?
+  N747       Int?
+  N748       Int?
+  N749       Int?
+  N750       Int?
+  N751       Int?
+  N752       Int?
+  N753       Int?
+  N754       Int?
+  N755       Int?
+  N756       Int?
+  N757       Int?
+  N758       Int?
+  N759       Int?
+  N760       Int?
+  N761       Int?
+  N762       Int?
+  N763       Int?
+  N764       Int?
+  N765       Int?
+  N766       Int?
+  N767       Int?
+  N768       Int?
+  N769       Int?
+  N770       Int?
+  N771       Int?
+  N772       Int?
+  N773       Int?
+  N774       Int?
+  N775       Int?
+  N776       Int?
+  N777       Int?
+  N778       Int?
+  N779       Int?
+  N780       Int?
+  N781       Int?
+  N782       Int?
+  N783       Int?
+  N784       Int?
+  N785       Int?
+  N786       Int?
+  N787       Int?
+  N788       Int?
+  N789       Int?
+  N790       Int?
+  N791       Int?
+}
+
+model dupa {
+  ArtistID Int?
+  SongID   Int  @id
+  N740     Int?
+  N741     Int?
+  N742     Int?
+  N743     Int?
+  N744     Int?
+  N745     Int?
+  N746     Int?
+  N747     Int?
+  N748     Int?
+  N749     Int?
+  N750     Int?
+  N751     Int?
+  N752     Int?
+  N753     Int?
+  N754     Int?
+  N755     Int?
+  N756     Int?
+  N757     Int?
+  N758     Int?
+  N759     Int?
+  N760     Int?
+  N761     Int?
+  N762     Int?
+  N763     Int?
+  N764     Int?
+  N765     Int?
+  N766     Int?
+  N767     Int?
+  N768     Int?
+  N769     Int?
+  N770     Int?
+  N771     Int?
+  N772     Int?
+  N773     Int?
+  N774     Int?
+  N775     Int?
+  N776     Int?
+  N777     Int?
+  N778     Int?
+  N779     Int?
+  N780     Int?
+  N781     Int?
+  N782     Int?
+  N783     Int?
+  N784     Int?
+  N785     Int?
+  N786     Int?
+  N787     Int?
+  N788     Int?
+  N789     Int?
+  N790     Int?
+  N791     Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model guestbook {
+  PostDate DateTime? @db.Timestamp(0)
+
+  @@ignore
+}
+
+model song {
+  songid     Int    @id @default(autoincrement())
+  artistid   Int
+  artistname String @db.VarChar(255)
+  songtitle  String @db.VarChar(255)
+}
+
+model songs {
+  SongID    Int      @id @default(autoincrement())
+  ArtistID  Int?
+  SongTitle String?  @db.VarChar(255)
+  artists   artists? @relation(fields: [ArtistID], references: [ArtistID], onDelete: NoAction, onUpdate: NoAction, map: "songs_ibfk_1")
+  charts    charts[]
+  test      test[]
+
+  @@index([ArtistID], map: "ArtistID")
+}
+
+model songs1 {
+  SongID    Int     @id @default(autoincrement())
+  ArtistID  Int?
+  SongTitle String? @db.VarChar(255)
+
+  @@index([ArtistID], map: "ArtistID")
+}
+
+model songs2 {
+  SongID    Int     @id @default(autoincrement())
+  ArtistID  Int?
+  SongTitle String? @db.VarChar(255)
+
+  @@index([ArtistID], map: "ArtistID")
+}
+
+model test {
+  TestID Int   @id @default(autoincrement())
+  SongID Int
+  N1     Int?
+  N2     Int?
+  N3     Int?
+  songs  songs @relation(fields: [SongID], references: [SongID], onDelete: NoAction, onUpdate: NoAction, map: "test_ibfk_2")
+
+  @@index([SongID], map: "SongID_idx")
+}

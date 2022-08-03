@@ -1,16 +1,20 @@
-import { Controller, Get, HttpCode, Body } from '@nestjs/common';
-import { Request } from 'express';
-import { SongsService } from 'src/services/songs.service';
-import { Song } from '../entities/song.entity';
+import { Controller, Get, Param } from '@nestjs/common';
+import { SongsService } from '../services/songs.service';
+import { songs1 as SongsModel } from '@prisma/client';
 
-@Controller('songs')
-export class SongsController{
+@Controller()
+export class SongsController {
+  constructor(
+    private readonly songsService: SongsService,) {}
 
-    constructor(private songsService : SongsService){}
+  @Get('songs/:id')
+  async getSongById(@Param('id') id: string): Promise<SongsModel>{
+    return this.songsService.getSong({SongID: Number(id)});
+  }
 
-    @Get()
-    @HttpCode(200)
-    async findAll(): Promise<Song[]> {
-        return this.songsService.findAll();
-    }
+  @Get('songs')
+  async getSongs(): Promise<SongsModel[]>{
+    return this.songsService.getSongs({});
+  }
+  
 }
