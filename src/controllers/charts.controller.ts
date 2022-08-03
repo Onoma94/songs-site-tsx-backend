@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ChartsService } from '../services/charts.service';
-import { charts1 as ChartsModel } from '@prisma/client';
+import { charts1_view as ChartsModel } from '@prisma/client';
 
 @Controller()
 export class ChartsController {

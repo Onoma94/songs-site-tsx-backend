@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import { PrismaService } from "./prisma.service";
-import { charts1, Prisma } from "@prisma/client";
+import { charts1_view, Prisma } from "@prisma/client";
 
 @Injectable()
 export class ChartsService{
@@ -8,22 +8,22 @@ export class ChartsService{
     constructor(private prisma: PrismaService){}
 
     async getChart(
-        charts1WhenUniqueInput: Prisma.charts1WhereUniqueInput,
-    ): Promise<charts1 | null>{
-        return this.prisma.charts1.findUnique({
-            where: charts1WhenUniqueInput,
+        charts1_viewWhenUniqueInput: Prisma.charts1_viewWhereUniqueInput,
+    ): Promise<charts1_view | null>{
+        return this.prisma.charts1_view.findUnique({
+            where: charts1_viewWhenUniqueInput,
         });
     }
 
     async getCharts(params: {
         skip?: number
         take?: number
-        cursor?: Prisma.charts1WhereUniqueInput
-        where?: Prisma.charts1WhereInput
-        orderBy?: Prisma.charts1OrderByWithRelationInput
-    }): Promise<charts1[]>{
+        cursor?: Prisma.charts1_viewWhereUniqueInput
+        where?: Prisma.charts1_viewWhereInput
+        orderBy?: Prisma.charts1_viewOrderByWithRelationInput
+    }): Promise<charts1_view[]>{
         const { skip, take, cursor, where, orderBy} = params;
-        return this.prisma.charts1.findMany(
+        return this.prisma.charts1_view.findMany(
             {skip, take, cursor, where, orderBy}
         )
     };

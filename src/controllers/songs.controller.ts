@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { SongsService } from '../services/songs.service';
-import { songs1 as SongsModel } from '@prisma/client';
+import { songs1_view as SongsModel } from '@prisma/client';
 
 @Controller()
 export class SongsController {
@@ -27,4 +27,8 @@ export class SongsController {
     return this.songsService.getSongs({where: {SongTitle: {contains: title}}});
   }
 
+  @Get('songs/artistname/:name')
+  async getSongsByArtistName(@Param('name') name: string) : Promise<SongsModel[]>{
+    return this.songsService.getSongs({where: {ArtistName: {contains: name}}});
+  }
 }

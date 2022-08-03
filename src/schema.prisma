@@ -63,13 +63,13 @@ model charts1 {
 }
 
 model charts1_view {
-  ChartID  Int  @id @unique(map: "ChartID_UNIQUE") @default(autoincrement())
-  ArtistID Int?
-  SongID   Int?
-  ChartNo  Int?
-  ChartPos Int?
-  ArtistName String? @db.VarChar(255)
-  SongTitle String? @db.VarChar(255)
+  ChartID  Int  @id @unique(map: "ChartID_UNIQUE")
+  ArtistID Int
+  SongID   Int
+  ChartNo  Int
+  ChartPos Int
+  ArtistName String @db.VarChar(255)
+  SongTitle String  @db.VarChar(255)
 
   @@index([SongID], map: "SongID_idx")
 }
@@ -223,9 +223,10 @@ model songs1 {
 }
 
 model songs1_view {
-  SongID    Int     @id @default(autoincrement())
-  ArtistID  Int?
-  SongTitle String? @db.VarChar(255)
+  SongID    Int     @id
+  ArtistID  Int
+  ArtistName String @db.VarChar(255)
+  SongTitle String @db.VarChar(255)
 
   @@index([ArtistID], map: "ArtistID")
 }
