@@ -62,6 +62,18 @@ model charts1 {
   @@index([SongID], map: "SongID_idx")
 }
 
+model charts1_view {
+  ChartID  Int  @id @unique(map: "ChartID_UNIQUE") @default(autoincrement())
+  ArtistID Int?
+  SongID   Int?
+  ChartNo  Int?
+  ChartPos Int?
+  ArtistName String? @db.VarChar(255)
+  SongTitle String? @db.VarChar(255)
+
+  @@index([SongID], map: "SongID_idx")
+}
+
 model csv2015 {
   SongID     Int     @id @default(autoincrement())
   ArtistName String? @db.VarChar(255)
@@ -203,6 +215,14 @@ model songs {
 }
 
 model songs1 {
+  SongID    Int     @id @default(autoincrement())
+  ArtistID  Int?
+  SongTitle String? @db.VarChar(255)
+
+  @@index([ArtistID], map: "ArtistID")
+}
+
+model songs1_view {
   SongID    Int     @id @default(autoincrement())
   ArtistID  Int?
   SongTitle String? @db.VarChar(255)
