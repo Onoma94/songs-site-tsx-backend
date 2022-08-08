@@ -14,4 +14,17 @@ export class ChartdatesService{
             where: chart1_datesWhenUniqueInput,
         });
     }
+
+    async getChartdates(params: {
+        skip?: number
+        take?: number
+        cursor?: Prisma.chart1_datesWhereUniqueInput
+        where?: Prisma.chart1_datesWhereInput
+        orderBy?: Prisma.chart1_datesOrderByWithRelationInput
+    }): Promise<chart1_dates[]>{
+        const { skip, take, cursor, where, orderBy} = params;
+        return this.prisma.chart1_dates.findMany(
+            {skip, take, cursor, where, orderBy}
+        )
+    };
 }
