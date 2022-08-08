@@ -15,6 +15,11 @@ export class ChartsService{
         });
     }
 
+    async getLatestChartNo() {
+        const result = await this.prisma.$queryRaw`SELECT MAX(ChartNo) AS latest FROM charts1`;
+        return result;
+    };
+
     async getCharts(params: {
         skip?: number
         take?: number

@@ -12,6 +12,11 @@ export class ChartdatesController {
     return this.chartdatesService.getChartdates({});
   }
 
+  @Get('chartdates/latest')
+  async getLatestChartdate(){
+    return this.chartdatesService.getLatestChartdate();
+  }
+
   @Get('chartdates/:id')
   async getChartdate(@Param('id') id: string): Promise<ChartdatesModel>{
     return this.chartdatesService.getChartdate({ChartNo: Number(id)});

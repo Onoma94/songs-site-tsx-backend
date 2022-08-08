@@ -13,6 +13,11 @@ export class ChartsController {
     .getCharts({where: {ChartNo: {equals: Number(id)}}, orderBy: {ChartPos: 'asc'}})
   }
 
+  @Get('charts/latest')
+  async getLatestChart(){
+    return this.chartsService.getLatestChartNo();
+  }
+
   @Get('charts/songid/:id')
   async getChartsBySongID(@Param('id') id: string): Promise<ChartsModel[]>{
     return this.chartsService
