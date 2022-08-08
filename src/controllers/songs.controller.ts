@@ -22,7 +22,7 @@ export class SongsController {
     return this.songsService.getSongs({where: {ArtistID: {equals: Number(id)}}, orderBy: {SongTitle: 'asc'}})
   }
 
-  @Get('songs/songtitle/:name')
+  @Get('songs/songtitle/:title')
   async getSongsByTitle(@Param('title') title: string) : Promise<SongsModel[]>{
     return this.songsService.getSongs({where: {SongTitle: {contains: title}}});
   }
